@@ -39,7 +39,15 @@ const [result, setresult] = useState("0");
         break;
       case "=":
         // Evaluate the expression in the result and set the result state to the evaluated value
-        setresult(eval(result));
+        try {
+          // Use try-catch to handle potential evaluation errors
+          // eslint-disable-next-line
+          const evaluatedResult = eval(result);
+          setresult(evaluatedResult.toString());
+        } catch (error) {
+          // Handle any evaluation errors, e.g., invalid expressions
+          setresult("Error");
+        }
         break;
       case "c":
         // Clear the result state
